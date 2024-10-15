@@ -8,5 +8,6 @@ public:
         reverse(nums.begin(), nums.begin()+len-k);
         reverse(nums.begin()+len-k, nums.end());
         reverse(nums.begin(), nums.end());
+
     }
 };
