@@ -18,4 +18,5 @@ public:
 
             return max_balance;
         }
-    };
+
+};
