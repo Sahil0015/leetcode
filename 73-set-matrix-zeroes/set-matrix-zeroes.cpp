@@ -4,28 +4,22 @@ public:
         int n = mat.size();
         if (n == 0) return;
         int m = mat[0].size();
-        vector<vector<int>> zeroes;
 
-        for(int i=0; i<n ;i++) {
-            vector<int> row;
-            row.push_back(i);
-            for(int j=0; j<m; j++)
-                if(mat[i][j] == 0)
-                    row.push_back(j);
-            zeroes.push_back(row);
-        }
+        vector<char> rowHasZero(n, 0);
+        vector<char> colHasZero(m, 0);
 
-        for(int i=0; i<n ;i++) {
-            if(zeroes[i].size() == 1) continue;
-            for(int j=1; j<zeroes[i].size(); j++) {
-                for(int k=0; k<n; k++) 
-                    mat[k][zeroes[i][j]] =0;
+        // First pass: mark rows and columns that should be zeroed
+        for (int i = 0; i < n; ++i)
+            for (int j = 0; j < m; ++j)
+                if (mat[i][j] == 0) {
+                    rowHasZero[i] = 1;
+                    colHasZero[j] = 1;
+                }
 
-                for(int k=0; k<m; k++) 
-                    mat[zeroes[i][0]][k] = 0;
-            }
-      }
-
-      return;
+        // Second pass: zero marked rows and columns
+        for (int i = 0; i < n; ++i)
+            for (int j = 0; j < m; ++j)
+                if (rowHasZero[i] || colHasZero[j])
+                    mat[i][j] = 0;
     }
 };
